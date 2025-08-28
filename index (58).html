@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QEO vCard Export - Generator vCard Profesional Online</title>
+    <meta name="description" content="QEO vCard Export - Generator vCard profesional dengan template modern, ekspor multiple format, dan fitur canggih untuk digital business card">
+    <meta name="keywords" content="vcard generator, digital business card, vcard export, electronic business card, contact card generator, professional vcard, vcard template">
+    <meta name="author" content="QEO vCard Export">
+    <meta property="og:title" content="QEO vCard Export - Generator vCard Profesional">
+    <meta property="og:description" content="Buat vCard profesional dengan template modern dan fitur lengkap">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vcard.qeo.qzz.io">
+    <link rel="canonical" href="https://vcard.qeo.qzz.io">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #0099ff;
+            --accent-color: #ff0099;
+            --bg-dark: #0a0a0f;
+            --bg-darker: #050508;
+            --text-light: #ffffff;
+            --text-gray: #888;
+            --grid-color: rgba(0, 255, 0, 0.1);
+            --glow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Matrix Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -2;
+            animation: matrixGrid 20s linear infinite;
+        }
+
+        @keyframes matrixGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Cyber particles */
+        .cyber-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+            box-shadow: var(--glow);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,20,40,0.6));
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,255,0,0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--glow);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 20px rgba(0,255,0,0.3); }
+            100% { box-shadow: 0 0 40px rgba(0,255,0,0.8), 0 0 60px rgba(0,255,0,0.4); }
+        }
+
+        .title {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: typewriter 3s steps(40) 1s both;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid var(--primary-color);
+            max-width: 100%;
+            word-break: keep-all;
+        }
+
+        @keyframes typewriter {
+            0% { width: 0; }
+            99% { border-right: 3px solid var(--primary-color); }
+            100% { 
+                width: 100%; 
+                border-right: transparent;
+            }
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+            animation: fadeInUp 1s ease-out 2s both;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            padding: 0 1rem;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 15px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+            margin: 0.5rem auto;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.7rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transform: translateZ(0);
+        }
+
+        /* Photo Upload */
+        .photo-upload {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .photo-preview:hover {
+            transform: scale(1.05);
+            box-shadow: var(--glow);
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .photo-upload input[type="file"] {
+            display: none;
+        }
+
+        .photo-upload-btn {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px dashed var(--primary-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .photo-upload-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+        }
+
+        /* Social Media Links */
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Template Selection */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .template-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,0,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .template-card:hover::before {
+            left: 100%;
+        }
+
+        .template-card:hover,
+        .template-card.active {
+            border-color: var(--primary-color);
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: var(--glow);
+        }
+
+        .template-preview {
+            width: 50px;
+            height: 30px;
+            margin: 0 auto 0.5rem;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .template-classic { background: linear-gradient(135deg, #ffffff, #f0f0f0); }
+        .template-modern { background: linear-gradient(135deg, #1a1a1a, #333); }
+        .template-neon { background: linear-gradient(135deg, #000, #001a33); }
+        .template-gradient { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        /* Color Picker */
+        .color-picker-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+        }
+
+        .color-option {
+            position: relative;
+        }
+
+        .color-option input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-option input[type="color"]:hover {
+            transform: scale(1.1) translateZ(0);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.8rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Preview Section */
+        .preview-section {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .vcard-preview {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            animation: previewFloat 6s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes previewFloat {
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(-10px) translateZ(0); }
+        }
+
+        .vcard-content {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .vcard-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: avatarGlow 3s ease-in-out infinite alternate;
+            overflow: hidden;
+        }
+
+        .vcard-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes avatarGlow {
+            0% { box-shadow: 0 0 20px rgba(0,255,0,0.3); }
+            100% { box-shadow: 0 0 40px rgba(0,255,0,0.8); }
+        }
+
+        /* Features Section */
+        .features-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(10, 10, 15, 0.6);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0,255,0,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: var(--glow);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(5, 5, 8, 0.9);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 0, 0.2);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .preview-section {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .form-section {
+                padding: 1rem;
+            }
+
+            .title {
+                font-size: 2rem;
+                white-space: normal;
+                border-right: none;
+                animation: none;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+            }
+
+            .template-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .color-picker-group {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vcard-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .photo-preview {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem 0;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .main-content {
+                padding: 1rem 0;
+            }
+
+            .vcard-preview {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,255,0,0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* QR Code Styling */
+        #qrcode canvas {
+            border-radius: 10px;
+            box-shadow: var(--glow);
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            font-size: 0.9rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            color: #ff6666;
+            font-size: 0.9rem;
+        }
+
+        /* Professional Features */
+        .pro-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pro-feature {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles for accessibility */
+        *:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-color: #ffffff;
+                --secondary-color: #ffffff;
+                --text-gray: #cccccc;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+    
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
+</head>
+<body>
+    <!-- Cyber Particles -->
+    <div class="cyber-particles" id="particles" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo" aria-hidden="true"></div>
+                <h1 class="title">QEO vCard Export</h1>
+            </div>
+            <p class="subtitle">Generator vCard Profesional dengan Template Modern & Fitur Canggih</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" role="main">
+        <div class="main-content">
+            <!-- Form Section -->
+            <section class="form-section fade-in" role="form" aria-labelledby="form-title">
+                <h2 class="section-title" id="form-title">Informasi Kontak</h2>
+                
+                <!-- Photo Upload -->
+                <div class="photo-upload">
+                    <div class="photo-preview" onclick="document.getElementById('photoUpload').click()" role="button" tabindex="0" aria-label="Upload foto profil">
+                        <span id="photoInitials">JD</span>
+                    </div>
+                    <input type="file" id="photoUpload" accept="image/*" aria-label="Pilih foto profil">
+                    <label for="photoUpload" class="photo-upload-btn">Upload Foto/Logo</label>
+                </div>
+                
+                <form id="vcardForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Nama Lengkap *</label>
+                            <input type="text" id="fullName" placeholder="John Doe" required aria-required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobTitle">Jabatan</label>
+                            <input type="text" id="jobTitle" placeholder="CEO & Founder">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Perusahaan</label>
+                            <input type="text" id="company" placeholder="Tech Innovators Inc.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">Departemen</label>
+                            <input type="text" id="department" placeholder="Marketing">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" placeholder="+62 812 3456 7890">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workPhone">Telepon Kantor</label>
+                            <input type="tel" id="workPhone" placeholder="+62 21 1234 5678">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" placeholder="john@example.com" required aria-required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workEmail">Email Kantor</label>
+                            <input type="email" id="workEmail" placeholder="john@company.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" id="website" placeholder="https://example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companyWebsite">Website Perusahaan</label>
+                            <input type="url" id="companyWebsite" placeholder="https://company.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Alamat</label>
+                        <textarea id="address" rows="2" placeholder="Jl. Contoh No. 123, Jakarta, Indonesia"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Catatan</label>
+                        <textarea id="notes" rows="2" placeholder="Informasi tambahan..."></textarea>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <h3 class="section-title">Media Sosial & Platform</h3>
+                    <div class="social-links">
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="twitter">Twitter/X</label>
+                            <input type="url" id="twitter" placeholder="https://twitter.com/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instagram">Instagram</label>
+                            <input type="url" id="instagram" placeholder="https://instagram.com/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="facebook">Facebook</label>
+                            <input type="url" id="facebook" placeholder="https://facebook.com/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="youtube">YouTube</label>
+                            <input type="url" id="youtube" placeholder="https://youtube.com/channel/id">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tiktok">TikTok</label>
+                            <input type="url" id="tiktok" placeholder="https://tiktok.com/@username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="github">GitHub</label>
+                            <input type="url" id="github" placeholder="https://github.com/username">
+                        </div>
+                    </div>
+
+                    <!-- Professional Information -->
+                    <h3 class="section-title">Informasi Profesional</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="industry">Industri</label>
+                            <select id="industry">
+                                <option value="">Pilih Industri</option>
+                                <option value="technology">Teknologi</option>
+                                <option value="finance">Keuangan</option>
+                                <option value="healthcare">Kesehatan</option>
+                                <option value="education">Pendidikan</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="consulting">Konsultan</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufaktur</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="legal">Hukum</option>
+                                <option value="media">Media</option>
+                                <option value="other">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Pengalaman</label>
+                            <select id="experience">
+                                <option value="">Pilih Pengalaman</option>
+                                <option value="fresh-graduate">Fresh Graduate</option>
+                                <option value="1-3-years">1-3 Tahun</option>
+                                <option value="3-5-years">3-5 Tahun</option>
+                                <option value="5-10-years">5-10 Tahun</option>
+                                <option value="10+-years">10+ Tahun</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="skills">Keahlian (pisahkan dengan koma)</label>
+                        <textarea id="skills" rows="2" placeholder="JavaScript, React, Node.js, Python, Digital Marketing"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="languages">Bahasa (pisahkan dengan koma)</label>
+                        <input type="text" id="languages" placeholder="Bahasa Indonesia, English, Mandarin">
+                    </div>
+                </form>
+
+                <h3 class="section-title">Template vCard</h3>
+                <div class="template-grid">
+                    <div class="template-card active" data-template="classic">
+                        <div class="template-preview template-classic"></div>
+                        <div>Classic</div>
+                    </div>
+                    <div class="template-card" data-template="modern">
+                        <div class="template-preview template-modern"></div>
+                        <div>Modern</div>
+                    </div>
+                    <div class="template-card" data-template="neon">
+                        <div class="template-preview template-neon"></div>
+                        <div>Neon</div>
+                    </div>
+                    <div class="template-card" data-template="gradient">
+                        <div class="template-preview template-gradient"></div>
+                        <div>Gradient</div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Kustomisasi Warna</h3>
+                <div class="color-picker-group">
+                    <div class="color-option">
+                        <label>Primary</label>
+                        <input type="color" id="primaryColor" value="#00ff00">
+                    </div>
+                    <div class="color-option">
+                        <label>Secondary</label>
+                        <input type="color" id="secondaryColor" value="#0099ff">
+                    </div>
+                    <div class="color-option">
+                        <label>Background</label>
+                        <input type="color" id="bgColor" value="#1a1a1a">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardSize">Ukuran Kartu</label>
+                        <select id="cardSize">
+                            <option value="standard">Standard (85x55mm)</option>
+                            <option value="large">Large (100x65mm)</option>
+                            <option value="compact">Compact (70x45mm)</option>
+                            <option value="square">Square (75x75mm)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qrSize">Ukuran QR Code</label>
+                        <select id="qrSize">
+                            <option value="small">Kecil (150x150px)</option>
+                            <option value="medium" selected>Sedang (200x200px)</option>
+                            <option value="large">Besar (300x300px)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn" onclick="generateVCard()" id="generateBtn">
+                        <span id="generateText">Generate vCard</span>
+                        <span id="generateLoading" class="loading" style="display: none;"></span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="downloadVCard()" id="downloadVcfBtn" disabled>
+                        Download VCF
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="downloadQR()" id="downloadQrBtn" disabled>
+                        Download QR
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="shareVCard()" id="shareBtn" disabled>
+                        Share
+                    </button>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="exportToPDF()">Export PDF</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportToPNG()">Export PNG</button>
+                    <button type="button" class="btn btn-secondary" onclick="printVCard()">Print</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <aside class="preview-section fade-in" role="complementary">
+                <div class="vcard-preview">
+                    <h2 class="section-title">Preview vCard</h2>
+                    <div class="vcard-content" id="vcardPreview">
+                        <div class="vcard-avatar" id="previewAvatar">
+                            <span id="previewInitials">JD</span>
+                        </div>
+                        <h3 id="previewName">John Doe</h3>
+                        <p id="previewJob">CEO & Founder</p>
+                        <p id="previewCompany">Tech Innovators Inc.</p>
+                        <hr style="margin: 1rem 0; border-color: var(--primary-color);">
+                        <div id="previewContacts">
+                            <p id="previewPhone">+62 812 3456 7890</p>
+                            <p id="previewEmail">john@example.com</p>
+                            <p id="previewWebsite">https://example.com</p>
+                        </div>
+                        <div id="previewSocial" style="margin-top: 1rem; display: none;">
+                            <hr style="margin: 1rem 0; border-color: var(--primary-color);">
+                            <div id="socialLinks"></div>
+                        </div>
+                        <p id="previewAddress" style="font-size: 0.8em; margin-top: 1rem;">
+                            Jl. Contoh No. 123<br>Jakarta, Indonesia
+                        </p>
+                        <div id="previewSkills" style="margin-top: 1rem; font-size: 0.8em; display: none;">
+                            <hr style="margin: 1rem 0; border-color: var(--primary-color);">
+                            <strong>Keahlian:</strong>
+                            <div id="skillsList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code Section -->
+                <div class="vcard-preview">
+                    <h3 class="section-title">QR Code</h3>
+                    <div id="qrcode" style="display: flex; justify-content: center; margin: 1rem 0;">
+                        <div style="width: 200px; height: 200px; background: rgba(255,255,255,0.9); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #000; font-size: 0.8rem; text-align: center; padding: 1rem;">
+                            Klik Generate vCard untuk membuat QR Code
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="downloadQR()" disabled id="qrDownloadBtn">Download QR Code</button>
+                </div>
+
+                <!-- Statistics -->
+                <div class="vcard-preview">
+                    <h3 class="section-title">Statistik</h3>
+                    <div style="text-align: left; font-size: 0.8em;">
+                        <p>Total Field: <span id="totalFields">0</span></p>
+                        <p>Field Terisi: <span id="filledFields">0</span></p>
+                        <p>Kelengkapan: <span id="completionRate">0%</span></p>
+                        <p>Social Media: <span id="socialCount">0</span></p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title" style="font-size: 2rem;">Fitur Profesional</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Multi-Platform Support</h3>
+                    <p>Compatible dengan semua smartphone dan aplikasi kontak populer</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Template Kustomisasi</h3>
+                    <p>4 template profesional dengan kontrol warna dan ukuran penuh</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>QR Code Dinamis</h3>
+                    <p>QR code otomatis ter-generate dengan berbagai ukuran</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Multiple Export</h3>
+                    <p>Export ke VCF, PDF, PNG dengan kualitas tinggi</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Preview</h3>
+                    <p>Lihat perubahan langsung dengan preview responsif</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Social Media Integration</h3>
+                    <p>Dukungan lengkap untuk 6+ platform media sosial</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Photo & Logo Support</h3>
+                    <p>Upload foto profil atau logo perusahaan</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Professional Fields</h3>
+                    <p>Informasi industri, pengalaman, dan keahlian</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 QEO vCard Export. All rights reserved.</p>
+            <p>Powered by Modern Web Technology</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentVCardData = null;
+        let currentQRCode = null;
+        let uploadedPhoto = null;
+
+        // Create cyber particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Photo upload handling
+        function initializePhotoUpload() {
+            const photoUpload = document.getElementById('photoUpload');
+            const photoPreview = document.querySelector('.photo-preview');
+            const photoInitials = document.getElementById('photoInitials');
+
+            photoUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 5 * 1024 * 1024) {
+                        showErrorMessage('Ukuran file terlalu besar. Maksimal 5MB.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedPhoto = e.target.result;
+                        
+                        // Create image element
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = 'Foto profil';
+                        
+                        // Clear previous content and add image
+                        photoPreview.innerHTML = '';
+                        photoPreview.appendChild(img);
+                        
+                        // Update preview avatar
+                        const previewAvatar = document.getElementById('previewAvatar');
+                        previewAvatar.innerHTML = '';
+                        const previewImg = document.createElement('img');
+                        previewImg.src = e.target.result;
+                        previewImg.alt = 'Foto profil preview';
+                        previewAvatar.appendChild(previewImg);
+
+                        updateStatistics();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Keyboard support for photo upload
+            photoPreview.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    photoUpload.click();
+                }
+            });
+        }
+
+        // Template selection
+        function initializeTemplateSelection() {
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    const templateName = this.getAttribute('data-template');
+                    applyTemplate(templateName);
+                    updatePreview();
+                });
+            });
+        }
+
+        // Color picker updates
+        function initializeColorPickers() {
+            document.getElementById('primaryColor').addEventListener('input', updatePreview);
+            document.getElementById('secondaryColor').addEventListener('input', updatePreview);
+            document.getElementById('bgColor').addEventListener('input', updatePreview);
+        }
+
+        // Form input updates
+        function initializeFormInputs() {
+            const inputs = document.querySelectorAll('#vcardForm input, #vcardForm textarea, #cardSize, #qrSize, #industry, #experience');
+            inputs.forEach(input => {
+                input.addEventListener('input', debounce(updatePreview, 300));
+                input.addEventListener('change', updatePreview);
+            });
+        }
+
+        // Debounce function to optimize performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const totalFields = 20; // Total possible fields
+            let filledFields = 0;
+            let socialCount = 0;
+
+            // Count filled fields
+            const fields = ['fullName', 'jobTitle', 'company', 'department', 'phone', 'workPhone', 
+                           'email', 'workEmail', 'website', 'companyWebsite', 'address', 'notes',
+                           'linkedin', 'twitter', 'instagram', 'facebook', 'youtube', 'tiktok', 
+                           'github', 'skills', 'languages'];
+
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim()) {
+                    filledFields++;
+                    
+                    // Count social media
+                    if (['linkedin', 'twitter', 'instagram', 'facebook', 'youtube', 'tiktok', 'github'].includes(fieldId)) {
+                        socialCount++;
+                    }
+                }
+            });
+
+            // Add photo
+            if (uploadedPhoto) {
+                filledFields++;
+            }
+
+            const completionRate = Math.round((filledFields / totalFields) * 100);
+
+            document.getElementById('totalFields').textContent = totalFields;
+            document.getElementById('filledFields').textContent = filledFields;
+            document.getElementById('completionRate').textContent = completionRate + '%';
+            document.getElementById('socialCount').textContent = socialCount;
+        }
+
+        // Update preview function
+        function updatePreview() {
+            const fullName = document.getElementById('fullName').value || 'John Doe';
+            const jobTitle = document.getElementById('jobTitle').value || 'CEO & Founder';
+            const company = document.getElementById('company').value || 'Tech Innovators Inc.';
+            const department = document.getElementById('department').value;
+            const phone = document.getElementById('phone').value || '+62 812 3456 7890';
+            const workPhone = document.getElementById('workPhone').value;
+            const email = document.getElementById('email').value || 'john@example.com';
+            const workEmail = document.getElementById('workEmail').value;
+            const website = document.getElementById('website').value || 'https://example.com';
+            const companyWebsite = document.getElementById('companyWebsite').value;
+            const address = document.getElementById('address').value || 'Jl. Contoh No. 123\nJakarta, Indonesia';
+            const skills = document.getElementById('skills').value;
+
+            // Update preview elements
+            document.getElementById('previewName').textContent = fullName;
+            document.getElementById('previewJob').textContent = jobTitle + (department ? ` - ${department}` : '');
+            document.getElementById('previewCompany').textContent = company;
+            
+            // Update contacts
+            const contacts = [];
+            if (phone) contacts.push(`📱 ${phone}`);
+            if (workPhone && workPhone !== phone) contacts.push(`☎️ ${workPhone}`);
+            if (email) contacts.push(`📧 ${email}`);
+            if (workEmail && workEmail !== email) contacts.push(`📧 ${workEmail} (Work)`);
+            if (website) contacts.push(`🌐 ${website}`);
+            if (companyWebsite && companyWebsite !== website) contacts.push(`🏢 ${companyWebsite}`);
+            
+            document.getElementById('previewContacts').innerHTML = contacts.map(contact => `<p style="font-size: 0.8em; margin: 0.2rem 0;">${contact}</p>`).join('');
+            
+            document.getElementById('previewAddress').innerHTML = address.replace(/\n/g, '<br>');
+            
+            // Update avatar initials if no photo
+            if (!uploadedPhoto) {
+                const initials = fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'JD';
+                document.getElementById('previewInitials').textContent = initials;
+                document.getElementById('photoInitials').textContent = initials;
+            }
+
+            // Update social media links
+            updateSocialMediaPreview();
+
+            // Update skills
+            if (skills) {
+                document.getElementById('previewSkills').style.display = 'block';
+                const skillsArray = skills.split(',').map(s => s.trim()).filter(s => s);
+                document.getElementById('skillsList').innerHTML = skillsArray.map(skill => 
+                    `<span style="background: rgba(0,255,0,0.2); padding: 0.2rem 0.5rem; margin: 0.2rem; border-radius: 10px; font-size: 0.7em; display: inline-block;">${skill}</span>`
+                ).join('');
+            } else {
+                document.getElementById('previewSkills').style.display = 'none';
+            }
+
+            // Apply custom colors
+            const primaryColor = document.getElementById('primaryColor').value;
+            const secondaryColor = document.getElementById('secondaryColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            
+            document.documentElement.style.setProperty('--primary-color', primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+
+            updateStatistics();
+        }
+
+        // Update social media preview
+        function updateSocialMediaPreview() {
+            const socialFields = {
+                linkedin: '💼 LinkedIn',
+                twitter: '🐦 Twitter',
+                instagram: '📷 Instagram',
+                facebook: '📘 Facebook',
+                youtube: '📺 YouTube',
+                tiktok: '🎵 TikTok',
+                github: '💻 GitHub'
+            };
+
+            const socialLinks = [];
+            Object.keys(socialFields).forEach(field => {
+                const value = document.getElementById(field).value;
+                if (value) {
+                    socialLinks.push(`<p style="font-size: 0.7em; margin: 0.1rem 0;">${socialFields[field]}</p>`);
+                }
+            });
+
+            const socialContainer = document.getElementById('previewSocial');
+            if (socialLinks.length > 0) {
+                socialContainer.style.display = 'block';
+                document.getElementById('socialLinks').innerHTML = socialLinks.join('');
+            } else {
+                socialContainer.style.display = 'none';
+            }
+        }
+
+        // Generate vCard data with enhanced fields
+        function generateVCardData() {
+            const fields = {
+                fullName: document.getElementById('fullName').value || '',
+                jobTitle: document.getElementById('jobTitle').value || '',
+                company: document.getElementById('company').value || '',
+                department: document.getElementById('department').value || '',
+                phone: document.getElementById('phone').value || '',
+                workPhone: document.getElementById('workPhone').value || '',
+                email: document.getElementById('email').value || '',
+                workEmail: document.getElementById('workEmail').value || '',
+                website: document.getElementById('website').value || '',
+                companyWebsite: document.getElementById('companyWebsite').value || '',
+                address: document.getElementById('address').value || '',
+                notes: document.getElementById('notes').value || '',
+                linkedin: document.getElementById('linkedin').value || '',
+                twitter: document.getElementById('twitter').value || '',
+                instagram: document.getElementById('instagram').value || '',
+                facebook: document.getElementById('facebook').value || '',
+                youtube: document.getElementById('youtube').value || '',
+                tiktok: document.getElementById('tiktok').value || '',
+                github: document.getElementById('github').value || '',
+                skills: document.getElementById('skills').value || '',
+                languages: document.getElementById('languages').value || '',
+                industry: document.getElementById('industry').value || '',
+                experience: document.getElementById('experience').value || ''
+            };
+
+            let vCardData = 'BEGIN:VCARD\n';
+            vCardData += 'VERSION:3.0\n';
+            vCardData += `FN:${fields.fullName}\n`;
+            
+            if (fields.fullName) {
+                const nameParts = fields.fullName.split(' ');
+                const lastName = nameParts.pop() || '';
+                const firstName = nameParts.join(' ') || '';
+                vCardData += `N:${lastName};${firstName};;;\n`;
+            }
+            
+            if (fields.jobTitle) {
+                let title = fields.jobTitle;
+                if (fields.department) title += ` - ${fields.department}`;
+                vCardData += `TITLE:${title}\n`;
+            }
+            if (fields.company) vCardData += `ORG:${fields.company}\n`;
+            if (fields.phone) vCardData += `TEL;TYPE=CELL:${fields.phone}\n`;
+            if (fields.workPhone) vCardData += `TEL;TYPE=WORK:${fields.workPhone}\n`;
+            if (fields.email) vCardData += `EMAIL;TYPE=INTERNET:${fields.email}\n`;
+            if (fields.workEmail) vCardData += `EMAIL;TYPE=WORK:${fields.workEmail}\n`;
+            if (fields.website) vCardData += `URL:${fields.website}\n`;
+            if (fields.companyWebsite) vCardData += `URL;TYPE=WORK:${fields.companyWebsite}\n`;
+            if (fields.address) vCardData += `ADR:;;${fields.address.replace(/\n/g, ' ')};;;;\n`;
+            
+            // Add social media URLs
+            if (fields.linkedin) vCardData += `URL;TYPE=LINKEDIN:${fields.linkedin}\n`;
+            if (fields.twitter) vCardData += `URL;TYPE=TWITTER:${fields.twitter}\n`;
+            if (fields.instagram) vCardData += `URL;TYPE=INSTAGRAM:${fields.instagram}\n`;
+            if (fields.facebook) vCardData += `URL;TYPE=FACEBOOK:${fields.facebook}\n`;
+            if (fields.youtube) vCardData += `URL;TYPE=YOUTUBE:${fields.youtube}\n`;
+            if (fields.tiktok) vCardData += `URL;TYPE=TIKTOK:${fields.tiktok}\n`;
+            if (fields.github) vCardData += `URL;TYPE=GITHUB:${fields.github}\n`;
+            
+            // Add professional information to notes
+            let notesContent = fields.notes;
+            if (fields.industry) notesContent += `\nIndustri: ${fields.industry}`;
+            if (fields.experience) notesContent += `\nPengalaman: ${fields.experience}`;
+            if (fields.skills) notesContent += `\nKeahlian: ${fields.skills}`;
+            if (fields.languages) notesContent += `\nBahasa: ${fields.languages}`;
+            
+            if (notesContent) vCardData += `NOTE:${notesContent.trim()}\n`;
+            
+            // Add photo if uploaded
+            if (uploadedPhoto) {
+                const photoData = uploadedPhoto.split(',')[1]; // Remove data:image/...;base64,
+                vCardData += `PHOTO;ENCODING=BASE64;TYPE=JPEG:${photoData}\n`;
+            }
+            
+            vCardData += 'END:VCARD';
+            
+            return vCardData;
+        }
+
+        // Generate QR Code with size options
+        function generateQRCode(vCardData) {
+            const qrContainer = document.getElementById('qrcode');
+            const qrSize = document.getElementById('qrSize').value;
+            
+            let size = 200;
+            switch (qrSize) {
+                case 'small': size = 150; break;
+                case 'medium': size = 200; break;
+                case 'large': size = 300; break;
+            }
+            
+            qrContainer.innerHTML = '';
+            
+            if (typeof QRCode !== 'undefined') {
+                try {
+                    const qrCode = new QRCodeStyling({
+                      width: size,
+                      height: size,
+                      data: vCardData,
+                      dotsOptions: { color: "#000000", type: "rounded" },
+                     backgroundOptions: { color: "#ffffff" },
+                        });
+                    qrCode.append(qrContainer);
+                    
+                    // Enable QR download buttons
+                    document.getElementById('downloadQrBtn').disabled = false;
+                    document.getElementById('qrDownloadBtn').disabled = false;
+                    
+                } catch (error) {
+                    console.error('Error generating QR code:', error);
+                    showErrorMessage('Error generating QR code: ' + error.message);
+                    qrContainer.innerHTML = `<div style="width: ${size}px; height: ${size}px; background: rgba(255,0,0,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ff6666; text-align: center; padding: 1rem;">QR Code Error</div>`;
+                }
+            } else {
+                qrContainer.innerHTML = `<div style="width: ${size}px; height: ${size}px; background: rgba(255,255,255,0.9); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #000; text-align: center; padding: 1rem;">QR Library tidak tersedia</div>`;
+            }
+        }
+
+        // Generate vCard function with auto QR generation
+        function generateVCard() {
+            const generateText = document.getElementById('generateText');
+            const generateLoading = document.getElementById('generateLoading');
+            const generateBtn = document.getElementById('generateBtn');
+            
+            // Show loading
+            generateText.style.display = 'none';
+            generateLoading.style.display = 'inline-block';
+            generateBtn.disabled = true;
+
+            // Validate required fields
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!fullName || !email) {
+                showErrorMessage('Mohon isi field yang wajib diisi: Nama Lengkap dan Email');
+                generateText.style.display = 'inline';
+                generateLoading.style.display = 'none';
+                generateBtn.disabled = false;
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showErrorMessage('Format email tidak valid');
+                generateText.style.display = 'inline';
+                generateLoading.style.display = 'none';
+                generateBtn.disabled = false;
+                return;
+            }
+
+            // Simulate generation process
+            setTimeout(() => {
+                try {
+                    // Generate vCard data
+                    currentVCardData = generateVCardData();
+                    
+                    // Auto-generate QR Code
+                    generateQRCode(currentVCardData);
+                    
+                    // Enable download buttons
+                    document.getElementById('downloadVcfBtn').disabled = false;
+                    document.getElementById('shareBtn').disabled = false;
+                    
+                    // Show success message
+                    showSuccessMessage('vCard berhasil dibuat! QR Code telah ter-generate otomatis.');
+                    
+                } catch (error) {
+                    console.error('Error generating vCard:', error);
+                    showErrorMessage('Terjadi kesalahan saat membuat vCard: ' + error.message);
+                } finally {
+                    // Hide loading
+                    generateText.style.display = 'inline';
+                    generateLoading.style.display = 'none';
+                    generateBtn.disabled = false;
+                }
+            }, 1500);
+        }
+
+        // Download vCard function
+        function downloadVCard() {
+            if (!currentVCardData) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu');
+                return;
+            }
+            
+            const fullName = document.getElementById('fullName').value.trim() || 'contact';
+            const fileName = `${fullName.replace(/\s+/g, '_').toLowerCase()}_vcard.vcf`;
+            
+            try {
+                const blob = new Blob([currentVCardData], { type: 'text/vcard;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = fileName;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+                
+                showSuccessMessage('vCard berhasil diunduh!');
+            } catch (error) {
+                console.error('Error downloading vCard:', error);
+                showErrorMessage('Terjadi kesalahan saat mengunduh vCard.');
+            }
+        }
+
+        // Download QR Code function
+        function downloadQR() {
+            if (!currentQRCode) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu untuk membuat QR Code');
+                return;
+            }
+            
+            try {
+                const canvas = document.querySelector('#qrcode canvas');
+                if (canvas) {
+                    const fullName = document.getElementById('fullName').value.trim() || 'contact';
+                    const fileName = `${fullName.replace(/\s+/g, '_').toLowerCase()}_qrcode.png`;
+                    
+                    // Create high-quality image
+                    const link = document.createElement('a');
+                    link.download = fileName;
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.style.display = 'none';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    showSuccessMessage('QR Code berhasil diunduh!');
+                } else {
+                    showErrorMessage('QR Code belum tersedia untuk diunduh');
+                }
+            } catch (error) {
+                console.error('Error downloading QR code:', error);
+                showErrorMessage('Terjadi kesalahan saat mengunduh QR Code.');
+            }
+        }
+
+        // Share vCard function with native sharing
+        function shareVCard() {
+            if (!currentVCardData) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu');
+                return;
+            }
+            
+            const fullName = document.getElementById('fullName').value.trim() || 'Kontak';
+            const company = document.getElementById('company').value.trim() || '';
+            const shareTitle = `vCard - ${fullName}`;
+            const shareText = `Kontak vCard untuk ${fullName}${company ? ' dari ' + company : ''}`;
+            
+            // Check if Web Share API is supported
+            if (navigator.share && navigator.canShare) {
+                try {
+                    const blob = new Blob([currentVCardData], { type: 'text/vcard' });
+                    const fileName = `${fullName.replace(/\s+/g, '_').toLowerCase()}_vcard.vcf`;
+                    const file = new File([blob], fileName, { type: 'text/vcard' });
+                    
+                    if (navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            title: shareTitle,
+                            text: shareText,
+                            files: [file]
+                        }).then(() => {
+                            showSuccessMessage('vCard berhasil dibagikan!');
+                        }).catch((error) => {
+                            console.log('Share cancelled or failed:', error);
+                            fallbackShare(shareText);
+                        });
+                    } else {
+                        fallbackShare(shareText);
+                    }
+                } catch (error) {
+                    console.error('Error sharing vCard:', error);
+                    fallbackShare(shareText);
+                }
+            } else {
+                fallbackShare(shareText);
+            }
+        }
+
+        // Fallback share function
+        function fallbackShare(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(currentVCardData).then(() => {
+                    showSuccessMessage('Data vCard telah disalin ke clipboard! Anda dapat paste di aplikasi lain.');
+                }).catch(() => {
+                    promptManualCopy(text);
+                });
+            } else {
+                promptManualCopy(text);
+            }
+        }
+
+        // Prompt manual copy
+        function promptManualCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = currentVCardData;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-999999px';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showSuccessMessage('Data vCard telah disalin! Anda dapat paste di aplikasi lain.');
+            } catch (error) {
+                showErrorMessage('Tidak dapat menyalin secara otomatis. Data tersedia di console browser.');
+                console.log('vCard Data:', currentVCardData);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Export to PDF function
+        function exportToPDF() {
+            if (!currentVCardData) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu');
+                return;
+            }
+            
+            try {
+                const printWindow = window.open('', '_blank');
+                const fullName = document.getElementById('fullName').value.trim() || 'Contact';
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>vCard - ${fullName}</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                            .vcard { max-width: 400px; margin: 0 auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+                            .avatar { width: 100px; height: 100px; border-radius: 50%; background: #00ff00; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
+                            .name { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 10px; }
+                            .title { font-size: 16px; color: #666; text-align: center; margin-bottom: 20px; }
+                            .info { margin-bottom: 10px; }
+                            .qr { text-align: center; margin-top: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="vcard">
+                            ${document.getElementById('vcardPreview').innerHTML}
+                            <div class="qr">
+                                ${document.getElementById('qrcode').innerHTML}
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                
+                printWindow.document.close();
+                printWindow.focus();
+                
+                setTimeout(() => {
+                    printWindow.print();
+                }, 500);
+                
+                showSuccessMessage('PDF siap untuk dicetak atau disimpan');
+            } catch (error) {
+                console.error('Error exporting to PDF:', error);
+                showErrorMessage('Terjadi kesalahan saat export PDF');
+            }
+        }
+
+        // Export to PNG function
+        function exportToPNG() {
+            if (!currentVCardData) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu');
+                return;
+            }
+            
+            try {
+                // Create canvas with vCard content
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 400;
+                canvas.height = 600;
+                
+                // Background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Border
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+                
+                // Text content
+                ctx.fillStyle = '#000000';
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                
+                const fullName = document.getElementById('fullName').value.trim() || 'John Doe';
+                const jobTitle = document.getElementById('jobTitle').value.trim() || 'CEO & Founder';
+                const company = document.getElementById('company').value.trim() || 'Tech Innovators Inc.';
+                const phone = document.getElementById('phone').value.trim() || '+62 812 3456 7890';
+                const email = document.getElementById('email').value.trim() || 'john@example.com';
+                
+                ctx.fillText(fullName, canvas.width / 2, 100);
+                ctx.font = '16px Arial';
+                ctx.fillText(jobTitle, canvas.width / 2, 130);
+                ctx.fillText(company, canvas.width / 2, 150);
+                ctx.fillText(phone, canvas.width / 2, 200);
+                ctx.fillText(email, canvas.width / 2, 230);
+                
+                // Add QR code if available
+                const qrCanvas = document.querySelector('#qrcode canvas');
+                if (qrCanvas) {
+                    ctx.drawImage(qrCanvas, canvas.width / 2 - 75, 300, 150, 150);
+                }
+                
+                // Download
+                const fileName = `${fullName.replace(/\s+/g, '_').toLowerCase()}_vcard.png`;
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showSuccessMessage('vCard PNG berhasil diunduh!');
+            } catch (error) {
+                console.error('Error exporting to PNG:', error);
+                showErrorMessage('Terjadi kesalahan saat export PNG');
+            }
+        }
+
+        // Print vCard function
+        function printVCard() {
+            if (!currentVCardData) {
+                showErrorMessage('Silakan generate vCard terlebih dahulu');
+                return;
+            }
+            
+            const printContent = document.getElementById('vcardPreview').cloneNode(true);
+            const qrContent = document.getElementById('qrcode').cloneNode(true);
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Print vCard</title>
+                    <style>
+                        @media print {
+                            @page { size: A4; margin: 1cm; }
+                            body { -webkit-print-color-adjust: exact; }
+                        }
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        .print-container { max-width: 400px; margin: 0 auto; text-align: center; }
+                        .vcard-content { border: 2px solid #00ff00; border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+                        .qr-section { margin-top: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="print-container">
+                        <div class="vcard-content">
+                            ${printContent.innerHTML}
+                        </div>
+                        <div class="qr-section">
+                            <h3>QR Code</h3>
+                            ${qrContent.innerHTML}
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        // Reset form function
+        function resetForm() {
+            if (confirm('Apakah Anda yakin ingin mereset semua data? Tindakan ini tidak dapat dibatalkan.')) {
+                // Reset form
+                document.getElementById('vcardForm').reset();
+                
+                // Reset photo
+                uploadedPhoto = null;
+                document.querySelector('.photo-preview').innerHTML = '<span id="photoInitials">JD</span>';
+                document.getElementById('previewAvatar').innerHTML = '<span id="previewInitials">JD</span>';
+                
+                // Reset template
+                document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+                document.querySelector('.template-card[data-template="classic"]').classList.add('active');
+                
+                // Reset colors
+                document.getElementById('primaryColor').value = '#00ff00';
+                document.getElementById('secondaryColor').value = '#0099ff';
+                document.getElementById('bgColor').value = '#1a1a1a';
+                
+                // Reset QR and vCard data
+                currentVCardData = null;
+                currentQRCode = null;
+                
+                // Reset QR display
+                document.getElementById('qrcode').innerHTML = `
+                    <div style="width: 200px; height: 200px; background: rgba(255,255,255,0.9); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #000; font-size: 0.8rem; text-align: center; padding: 1rem;">
+                        Klik Generate vCard untuk membuat QR Code
+                    </div>
+                `;
+                
+                // Disable buttons
+                document.getElementById('downloadVcfBtn').disabled = true;
+                document.getElementById('downloadQrBtn').disabled = true;
+                document.getElementById('qrDownloadBtn').disabled = true;
+                document.getElementById('shareBtn').disabled = true;
+                
+                // Reset CSS variables
+                document.documentElement.style.setProperty('--primary-color', '#00ff00');
+                document.documentElement.style.setProperty('--secondary-color', '#0099ff');
+                
+                // Update preview
+                updatePreview();
+                
+                showSuccessMessage('Form berhasil direset!');
+            }
+        }
+
+        // Apply template styles
+        function applyTemplate(templateName) {
+            const preview = document.querySelector('.vcard-preview');
+            
+            switch (templateName) {
+                case 'classic':
+                    preview.style.background = 'rgba(255, 255, 255, 0.95)';
+                    preview.style.color = '#333';
+                    break;
+                case 'modern':
+                    preview.style.background = 'rgba(26, 26, 26, 0.95)';
+                    preview.style.color = '#fff';
+                    break;
+                case 'neon':
+                    preview.style.background = 'rgba(0, 26, 51, 0.95)';
+                    preview.style.color = '#00ffff';
+                    break;
+                case 'gradient':
+                    preview.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9))';
+                    preview.style.color = '#fff';
+                    break;
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            removeMessages();
+            
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            successDiv.setAttribute('role', 'status');
+            successDiv.setAttribute('aria-live', 'polite');
+            
+            const formSection = document.querySelector('.form-section');
+            formSection.appendChild(successDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Show error message
+        function showErrorMessage(message) {
+            removeMessages();
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            errorDiv.setAttribute('role', 'alert');
+            errorDiv.setAttribute('aria-live', 'assertive');
+            
+            const formSection = document.querySelector('.form-section');
+            formSection.appendChild(errorDiv);
+            
+            // Auto remove after 7 seconds
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, 7000);
+        }
+
+        // Remove existing messages
+        function removeMessages() {
+            const existingMessages = document.querySelectorAll('.success-message, .error-message');
+            existingMessages.forEach(msg => msg.remove());
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Create particles
+                createParticles();
+                
+                // Initialize components
+                initializePhotoUpload();
+                initializeTemplateSelection();
+                initializeColorPickers();
+                initializeFormInputs();
+                
+                // Initial preview update
+                updatePreview();
+                
+                // Add template change listener
+                document.querySelectorAll('.template-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const templateName = this.getAttribute('data-template');
+                        applyTemplate(templateName);
+                    });
+                });
+                
+                // Form validation on submit
+                document.getElementById('vcardForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    generateVCard();
+                });
+                
+                // Add service worker for PWA capabilities if available
+                if ('serviceWorker' in navigator) {
+                    console.log('Service Worker support detected');
+                }
+                
+                console.log('QEO vCard Export initialized successfully!');
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showErrorMessage('Terjadi kesalahan saat memuat aplikasi. Silakan refresh halaman.');
+            }
+        });
+
+        // Handle window resize for responsive particles
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                createParticles();
+            }, 250);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key.toLowerCase()) {
+                    case 'g':
+                        e.preventDefault();
+                        generateVCard();
+                        break;
+                    case 'd':
+                        e.preventDefault();
+                        downloadVCard();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        e.stopPropagation();
+                        shareVCard();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        resetForm();
+                        break;
+                }
+            }
+            
+            // ESC key to close messages
+            if (e.key === 'Escape') {
+                removeMessages();
+            }
+        });
+
+        // Handle online/offline status
+        window.addEventListener('online', function() {
+            showSuccessMessage('Koneksi internet tersambung kembali');
+        });
+
+        window.addEventListener('offline', function() {
+            showErrorMessage('Tidak ada koneksi internet. Beberapa fitur mungkin tidak berfungsi.');
+        });
+
+        // Prevent form submission on Enter key in inputs (except textarea)
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' && e.key === 'Enter') {
+                e.preventDefault();
+                const inputs = Array.from(document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="url"]'));
+                const currentIndex = inputs.indexOf(e.target);
+                const nextInput = inputs[currentIndex + 1];
+                
+                if (nextInput) {
+                    nextInput.focus();
+                } else {
+                    generateVCard();
+                }
+            }
+        });
+
+        // Auto-save to localStorage (with user permission)
+        let autoSaveEnabled = false;
+        
+        function enableAutoSave() {
+            if (confirm('Aktifkan auto-save data form di browser? Data akan tersimpan lokal dan tidak dikirim ke server.')) {
+                autoSaveEnabled = true;
+                showSuccessMessage('Auto-save diaktifkan. Data akan tersimpan otomatis.');
+            }
+        }
+        
+        function autoSave() {
+            if (!autoSaveEnabled) return;
+            
+            try {
+                const formData = {};
+                const inputs = document.querySelectorAll('#vcardForm input, #vcardForm textarea, #vcardForm select');
+                
+                inputs.forEach(input => {
+                    if (input.type !== 'file') {
+                        formData[input.id] = input.value;
+                    }
+                });
+                
+                if (uploadedPhoto) {
+                    formData.uploadedPhoto = uploadedPhoto;
+                }
+                
+                // Store in memory instead of localStorage
+                window.vcardData = formData;
+            } catch (error) {
+                console.error('Auto-save error:', error);
+            }
+        }
+
+        // Load saved data
+        function loadSavedData() {
+            if (window.vcardData && autoSaveEnabled) {
+                try {
+                    Object.keys(window.vcardData).forEach(key => {
+                        if (key === 'uploadedPhoto' && window.vcardData[key]) {
+                            uploadedPhoto = window.vcardData[key];
+                            const img = document.createElement('img');
+                            img.src = uploadedPhoto;
+                            img.alt = 'Foto profil';
+                            document.querySelector('.photo-preview').innerHTML = '';
+                            document.querySelector('.photo-preview').appendChild(img);
+                        } else {
+                            const element = document.getElementById(key);
+                            if (element) {
+                                element.value = window.vcardData[key];
+                            }
+                        }
+                    });
+                    
+                    updatePreview();
+                    showSuccessMessage('Data tersimpan berhasil dimuat');
+                } catch (error) {
+                    console.error('Load data error:', error);
+                }
+            }
+        }
+
+        // Add auto-save trigger
+        setInterval(() => {
+            if (autoSaveEnabled) {
+                autoSave();
+            }
+        }, 30000); // Auto-save every 30 seconds
+
+        // Accessibility: Announce dynamic content changes
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // Add focus management for better keyboard navigation
+        function manageFocus() {
+            const focusableElements = document.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            
+            focusableElements.forEach((element, index) => {
+                element.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab') {
+                        // Custom tab behavior could be added here if needed
+                    }
+                });
+            });
+        }
+
+        // Initialize accessibility features
+        document.addEventListener('DOMContentLoaded', function() {
+            manageFocus();
+            
+            // Add skip link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#vcardForm';
+            skipLink.textContent = 'Skip to main content';
+            skipLink.className = 'sr-only';
+            skipLink.style.position = 'absolute';
+            skipLink.style.top = '0';
+            skipLink.style.left = '0';
+            skipLink.addEventListener('focus', function() {
+                this.style.position = 'static';
+            });
+            skipLink.addEventListener('blur', function() {
+                this.style.position = 'absolute';
+            });
+            
+            document.body.insertBefore(skipLink, document.body.firstChild);
+        });
+    </script>
+</body>
+</html>
